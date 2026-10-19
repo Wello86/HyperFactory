@@ -1,0 +1,52 @@
+# .NET
+bin/
+obj/
+*.user
+.vs/
+*.suo
+.idea/
+
+# NuGet
+.nuget/
+*.nupkg
+
+# Node
+node_modules/
+dist/
+coverage/
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.log
+
+# Local/session artifacts (MR review comments, analytics reports)
+docs/reports/
+docs/reviews/
+mr-comments.md
+docs/plans/*-mr.md
+
+# Local CLI config (user-specific model/profile settings)
+**/codemie/
+**/.codemie/
+/sh.exe.stackdump
+
+# AI
+.ai-run/sdlc-factory/
+.ai-run/runs/
+.agents/memory/sdlc/daily/
+docs/superpowers/tasks/*/*
+!docs/superpowers/tasks/*/plan.md
+!docs/superpowers/tasks/*/spec.md
+!docs/superpowers/tasks/*/technical-analysis.md
+!docs/superpowers/tasks/*/code-review-deferred.md
+docs/superpowers/qa-tasks/*/*
+!docs/superpowers/qa-tasks/*/plan.md
+!docs/superpowers/qa-tasks/*/spec.md
+!docs/superpowers/qa-tasks/*/technical-analysis.md
+!docs/superpowers/qa-tasks/*/code-review-deferred.md
+.claude/settings.local.json

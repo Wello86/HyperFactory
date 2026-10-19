@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Wael El-Qamash · Personal Report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{
+  background:#FBF9F4;
+  color:#1A1A17;
+  font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:0.9375rem;
+  line-height:1.6;
+  padding:3rem 1.25rem 6rem;
+}
+a{color:#8A3324;text-decoration:none}
+a:hover{text-decoration:underline}
+p{margin:0}
+h1,h2,h3{font-family:'Newsreader',Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-0.01em}
+h1{font-size:2rem;line-height:1.2;margin-bottom:0.25rem}
+h2{
+  font-size:0.6875rem;font-family:'IBM Plex Sans',sans-serif;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;color:#8A3324;
+  border-bottom:1px solid #D6D0C4;padding-bottom:0.4rem;margin:2.5rem 0 1rem;
+}
+h3{font-size:1rem;font-weight:400;margin-bottom:0.5rem}
+.mono{font-family:'IBM Plex Mono','Courier New',monospace}
+.page{max-width:760px;margin:0 auto}
+.header-rule{border:none;border-top:2px solid #1A1A17;margin-bottom:1.5rem}
+.header-name{font-size:2.25rem;letter-spacing:-0.02em}
+.header-email{font-size:0.875rem;color:#6B6860;margin-bottom:1rem}
+.header-meta{font-size:0.8125rem;color:#6B6860;margin-bottom:0.5rem}
+.meta-chips{display:flex;flex-wrap:wrap;gap:0.375rem;margin-top:0.75rem}
+.chip{
+  display:inline-block;font-size:0.75rem;font-family:'IBM Plex Mono',monospace;
+  padding:0.2rem 0.6rem;border:1px solid #C8C3B8;border-radius:2px;
+  color:#4A4840;background:#F4F1EC;white-space:nowrap;
+}
+.chip.accent{background:#FFF5F3;border-color:#BF7065;color:#8A3324}
+@media(prefers-reduced-motion:no-preference){
+  .bar-fill{transform:scaleX(0);animation:bar-grow .5s cubic-bezier(.2,.7,.3,1) forwards}
+  @keyframes bar-grow{to{transform:scaleX(1)}}
+  .section{opacity:0;animation:fade-up .4s ease forwards}
+  .section:nth-child(1){animation-delay:.05s}.section:nth-child(2){animation-delay:.10s}
+  .section:nth-child(3){animation-delay:.15s}.section:nth-child(4){animation-delay:.20s}
+  .section:nth-child(5){animation-delay:.25s}.section:nth-child(6){animation-delay:.30s}
+  .section:nth-child(7){animation-delay:.35s}.section:nth-child(8){animation-delay:.40s}
+  .section:nth-child(9){animation-delay:.45s}.section:nth-child(10){animation-delay:.50s}
+  @keyframes fade-up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:1rem;margin-bottom:1.25rem}
+.stat-group{margin-bottom:1.25rem}
+.stat-group-label{
+  font-size:0.6875rem;font-family:'IBM Plex Sans',sans-serif;font-weight:500;
+  letter-spacing:.09em;text-transform:uppercase;color:#A5A099;
+  margin-bottom:0.6rem;
+}
+.stat-group .stat-grid{margin-bottom:0}
+.stat{border-top:2px solid #D6D0C4;padding-top:0.6rem}
+.stat-value{font-family:'IBM Plex Mono',monospace;font-size:1.5rem;font-weight:500;line-height:1.1;color:#1A1A17}
+.stat-value.accent{color:#8A3324}.stat-value.positive{color:#3F6B4F}
+.stat-label{font-size:0.75rem;color:#8A8680;margin-top:0.15rem}
+details{margin-bottom:0.75rem}
+summary{
+  font-size:0.8125rem;font-weight:500;cursor:pointer;
+  padding:0.4rem 0;border-bottom:1px solid #D6D0C4;
+  list-style:none;display:flex;align-items:center;gap:0.5rem;
+}
+summary::before{content:'\25B6';font-size:0.625rem;color:#8A8680;transition:transform .2s}
+details[open] summary::before{transform:rotate(90deg)}
+summary::-webkit-details-marker{display:none}
+.item-table{width:100%;border-collapse:collapse;margin-top:0.75rem;font-size:0.8125rem}
+.item-table th{
+  text-align:left;padding:0.4rem 0.75rem;
+  font-family:'IBM Plex Mono',monospace;font-size:0.6875rem;font-weight:500;
+  color:#8A8680;border-bottom:1px solid #D6D0C4;white-space:nowrap;
+}
+.item-table td{padding:0.45rem 0.75rem;border-bottom:1px solid #EDE9E1;vertical-align:top}
+.item-table tr:last-child td{border-bottom:none}
+.item-table a{color:#8A3324}
+.tag{
+  display:inline-block;font-size:0.6875rem;font-family:'IBM Plex Mono',monospace;
+  padding:0.1rem 0.45rem;border-radius:2px;background:#EDE9E1;color:#4A4840;white-space:nowrap;
+}
+.tag.resolved,.tag.merged,.tag.done{background:#EBF4EE;color:#3F6B4F}
+.tag.open,.tag.in-progress{background:#FFF5F3;color:#8A3324}
+.breakdown-table{border-collapse:collapse;font-size:0.8125rem;margin-bottom:0.5rem}
+.breakdown-table th{font-weight:500;text-align:left;padding:0.3rem 1.2rem 0.3rem 0;color:#8A8680;white-space:nowrap}
+.breakdown-table td{text-align:right;padding:0.3rem 1.2rem 0.3rem 0;font-family:'IBM Plex Mono',monospace;min-width:3.5rem;white-space:nowrap}
+.breakdown-table thead th{font-size:0.75rem;text-transform:uppercase;letter-spacing:.04em;padding-bottom:.5rem}
+.breakdown-table tbody th{font-size:0.8125rem;color:#3D3935;padding-right:1.5rem}
+.breakdown-table .c-factory{color:#3F6B4F}.breakdown-table .c-skills{color:#2B6CB0}
+.breakdown-table .c-agents{color:#6B46C1}.breakdown-table .c-aionly{color:#B8650A}
+.breakdown-table .c-none{color:#8A8680}.breakdown-table .c-dash{color:#C8C3B8}
+.bar-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem 2.5rem}
+.bar-head{
+  font-family:'IBM Plex Sans',sans-serif;font-size:0.6875rem;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;color:#8A8680;
+  padding-bottom:.5rem;margin-bottom:.5rem;border-bottom:1px solid #EDE9E1;
+}
+.bar-row{
+  display:grid;grid-template-columns:minmax(0,11rem) minmax(2.5rem,1fr) auto;
+  align-items:center;gap:0 .7rem;padding:.28rem 0;
+}
+.bar-name{
+  font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#3D3935;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.bar-track{height:4px;border-radius:2px;background:#EDE9E1;overflow:hidden}
+.bar-fill{
+  display:block;height:100%;border-radius:2px;min-width:2px;
+  background:linear-gradient(90deg,#8A3324,#BF7065);
+  transform-origin:left center;
+}
+.bar-value{
+  font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#1A1A17;
+  text-align:right;min-width:3.5rem;
+}
+.bar-unit{color:#A5A099;margin-left:.3rem}
+.flag-list{list-style:none;padding:0;margin:0}
+.flag-list li{
+  font-size:0.8125rem;padding:0.45rem 0;border-bottom:1px solid #EDEAE4;color:#3D3935;
+}
+.flag-list li:last-child{border-bottom:none}
+.flag-list.good li{padding-left:1.35rem;position:relative;color:#3F6B4F}
+.flag-list.good li::before{content:'✓';position:absolute;left:0;color:#3F6B4F;font-weight:600}
+.empty-state{font-size:0.8125rem;color:#8A8680;font-style:italic;padding:0.5rem 0}
+.coaching-list{counter-reset:coaching;list-style:none;padding:0}
+.coaching-list li{
+  counter-increment:coaching;
+  display:grid;grid-template-columns:2rem 1fr;gap:0 0.75rem;
+  padding:0.85rem 0;border-bottom:1px solid #EDE9E1;
+  font-size:0.9375rem;line-height:1.55;
+}
+.coaching-list li:last-child{border-bottom:none}
+.coaching-list li::before{
+  content:counter(coaching);
+  font-family:'IBM Plex Mono',monospace;font-size:1.1rem;font-weight:500;
+  color:#BF7065;line-height:1.4;text-align:right;
+}
+@media print{
+  body{padding:0;background:#fff;color:#000}
+  .header-rule{border-top-color:#000}
+  .section{opacity:1!important;animation:none!important;transform:none!important}
+  a{color:#000;text-decoration:underline}
+  details{display:block}
+  details summary{display:none}
+  .item-table{page-break-inside:avoid}
+  .coaching-list li{page-break-inside:avoid}
+  .bar-cols{page-break-inside:avoid}
+  .bar-fill{background:#5A5650;animation:none;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <hr class="header-rule">
+  <h1 class="header-name">Wael El-Qamash</h1>
+  <div class="header-email">wael_el-qamash@epam.com</div>
+  <div class="header-meta">2026-09-07 – 2026-09-14 &nbsp;&middot;&nbsp; Generated 2026-09-15 09:36 UTC</div>
+  <div class="meta-chips"><span class="chip">Shazam</span><span class="chip accent">A3</span><span class="chip">CEE</span><span class="chip">Poland</span><span class="chip">.NET</span></div>
+  <div id="sections"><div class="section"><h2><span style="color:#C8C3B8;margin-right:.6rem">01</span>Delivery</h2><div class="stat-group"><div class="stat-group-label">Tickets</div><div class="stat-grid"><div class="stat"><div class="stat-value">10</div><div class="stat-label">Taken to work</div></div><div class="stat"><div class="stat-value">3</div><div class="stat-label">In progress</div></div><div class="stat"><div class="stat-value positive">7</div><div class="stat-label">Delivered</div></div><div class="stat"><div class="stat-value">70%</div><div class="stat-label">Resolution rate</div></div></div></div><div class="stat-group"><div class="stat-group-label">Merge requests</div><div class="stat-grid"><div class="stat"><div class="stat-value">11</div><div class="stat-label">MRs authored</div></div><div class="stat"><div class="stat-value">10</div><div class="stat-label">MRs merged</div></div><div class="stat"><div class="stat-value">91%</div><div class="stat-label">Merge rate</div></div><div class="stat"><div class="stat-value">14</div><div class="stat-label">MRs reviewed</div></div></div></div><div class="stat-grid"><div class="stat"><div class="stat-value">13.9h</div><div class="stat-label">Avg cycle time</div></div><div class="stat"><div class="stat-value">M</div><div class="stat-label">Avg complexity</div></div></div><details><summary>Tickets (10)</summary>
+        <table class="item-table"><thead><tr><th>Key</th><th>Summary</th><th>Status</th><th>Activity</th></tr></thead>
+        <tbody><tr>
+      <td><a href="https://jiraeu.epam.com/browse/EPMCDMPTST-1944" target="_blank" rel="noopener">EPMCDMPTST-1944</a></td>
+      <td>BEVN-001 Codebase Mapping</td>
+      <td><span class="tag resolved">Resolved</span></td>
+      <td><span class="tag">resolved</span></td>
+    </tr><tr>
+      <td><a href="https://jiraeu.epam.com/browse/EPMCDMPTST-1951" target="_blank" rel="noopener">EPMCDMPTST-1951</a></td>
+      <td>BEVN-105 Upgrade to the Latest .NET Version</td>
+      <td><span class="tag resolved">Resolved</span></td>
+      <td><span class="tag">worked</span></td>
+    </tr><tr>
+      <td><a href="https://jiraeu.epam.com/browse/EPMCDMPTST-1948" target="_blank" rel="noopener">EPMCDMPTST-1948</a></td>
+      <td>BEVN-102 The App Crashes Under Concurrent Load</td>
+      <td><span class="tag resolved">Resolved</span></td>
+      <td><span class="tag">worked</span></td>
+    </tr><tr>
+      <td><a href="https://jiraeu.epam.com/browse/EPMCDMPTST-1946" target="_blank" rel="noopener">EPMCDMPTST-1946</a></td>
+      <td>BEVN-003 Technical Debt Audit</td>
+      <td><span class="tag resolved">Resolved</span></td>
+      <td><span class="tag">resolved</span></td>
+    </tr><tr>
+      <td><a href="https://jiraeu.epam.com/browse/EPMCDMPTST-1965" target="_blank" rel="noopener">EPMCDMPTST-1965</a></td>
+      <td>BEVN-119 Attendees Cannot Register for Individual Sessions</td>
+      <td><span class="tag resolved">Resolved</span></td>
+      <td><span class="tag">resolved</span></td>
+    </tr><tr>
+      <td><a href="https://jiraeu.epam.com/browse/EPMCDMPTST-1955" target="_blank" rel="noopener">EPMCDMPTST-1955</a></td>
+      <td>BEVN-109 Fix Transaction Boundaries in Multi-Step Writes</td>
+      <td><span class="tag resolved">Resolved</span></td>
+      <td><span class="tag">resolved</span></td>
+    </tr><tr>
+      <td><a href="https://jiraeu.epam.com/browse/EPMCDMPTST-1954" target="_blank" rel="noopener">EPMCDMPTST-1954</a></td>
+      <td>BEVN-108 Introduce DTOs to Decouple API from Database</td>
+      <td><span class="tag resolved">Resolved</span></td>
+      <td><span class="tag">resolved</span></td>
+    </tr><tr>
+      <td><a href="https://jiraeu.epam.com/browse/EPMCDMPTST-1952" target="_blank" rel="noopener">EPMCDMPTST-1952</a></td>
+      <td>BEVN-106 Eliminate Sync-Over-Async Patterns</td>
+      <td><span class="tag resolved">Resolved</span></td>
+      <td><span class="tag">resolved</span></td>
+    </tr><tr>
+      <td><a href="https://jiraeu.epam.com/browse/EPMCDMPTST-2326" target="_blank" rel="noopener">EPMCDMPTST-2326</a></td>
+      <td>BEVN-201 Conference Search and Filtering</td>
+      <td><span class="tag open">In Progress</span></td>
+      <td><span class="tag">worked</span></td>
+    </tr><tr>
+      <td><a href="https://jiraeu.epam.com/browse/EPMCDMPTST-1966" target="_blank" rel="noopener">EPMCDMPTST-1966</a></td>
+      <td>BEVN-120 Public API Endpoints Expose Attendee Data</td>
+      <td><span class="tag resolved">Resolved</span></td>
+      <td><span class="tag">resolved</span></td>
+    </tr></tbody></table></details><details><summary>Merge requests (11)</summary>
+        <table class="item-table"><thead><tr><th>Title</th><th>State</th><th>Lines ±</th><th>Date</th></tr></thead>
+        <tbody><tr>
+      <td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/1" target="_blank" rel="noopener">EPMCDMPTST-1944:  Adding claude.md file and other context files</a></td>
+      <td><span class="tag merged">merged</span></td>
+      <td><span class="mono" style="color:#3F6B4F">+333</span> / <span class="mono" style="color:#8A3324">-0</span></td>
+      <td class="mono">2026-09-07</td>
+    </tr><tr>
+      <td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/3" target="_blank" rel="noopener">EPMCDMPTST-1946: Created Technical Debt Audit md file.</a></td>
+      <td><span class="tag merged">merged</span></td>
+      <td><span class="mono" style="color:#3F6B4F">+34</span> / <span class="mono" style="color:#8A3324">-0</span></td>
+      <td class="mono">2026-09-08</td>
+    </tr><tr>
+      <td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/8" target="_blank" rel="noopener">EPMCDMPTST-1951: Upgrade .NET version from 6 to 10 and change all dependencies.</a></td>
+      <td><span class="tag merged">merged</span></td>
+      <td><span class="mono" style="color:#3F6B4F">+183</span> / <span class="mono" style="color:#8A3324">-21</span></td>
+      <td class="mono">2026-09-09</td>
+    </tr><tr>
+      <td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/6" target="_blank" rel="noopener">EPMCDMPTST-1948: Fix AppDbContext Singleton causing crashes under concurrent load</a></td>
+      <td><span class="tag merged">merged</span></td>
+      <td><span class="mono" style="color:#3F6B4F">+206</span> / <span class="mono" style="color:#8A3324">-52</span></td>
+      <td class="mono">2026-09-09</td>
+    </tr><tr>
+      <td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/17" target="_blank" rel="noopener">EPMCDMPTST-1954: Introduce DTOs</a></td>
+      <td><span class="tag merged">merged</span></td>
+      <td><span class="mono" style="color:#3F6B4F">+357</span> / <span class="mono" style="color:#8A3324">-40</span></td>
+      <td class="mono">2026-09-10</td>
+    </tr><tr>
+      <td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/16" target="_blank" rel="noopener">EPMCDMPTST-1955: Wrap multi-step writes in transactions</a></td>
+      <td><span class="tag merged">merged</span></td>
+      <td><span class="mono" style="color:#3F6B4F">+184</span> / <span class="mono" style="color:#8A3324">-1</span></td>
+      <td class="mono">2026-09-10</td>
+    </tr><tr>
+      <td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/14" target="_blank" rel="noopener">EPMCDMPTST-1952: Eliminate sync-over-async, propagate CancellationToken</a></td>
+      <td><span class="tag merged">merged</span></td>
+      <td><span class="mono" style="color:#3F6B4F">+274</span> / <span class="mono" style="color:#8A3324">-75</span></td>
+      <td class="mono">2026-09-10</td>
+    </tr><tr>
+      <td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/12" target="_blank" rel="noopener">EPMCDMPTST-1948: Fix lint issue</a></td>
+      <td><span class="tag merged">merged</span></td>
+      <td><span class="mono" style="color:#3F6B4F">+2</span> / <span class="mono" style="color:#8A3324">-3</span></td>
+      <td class="mono">2026-09-10</td>
+    </tr><tr>
+      <td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/25" target="_blank" rel="noopener">EPMCDMPTST-1966: Adding plan and a change in claude md to force using plan creator skill</a></td>
+      <td><span class="tag merged">merged</span></td>
+      <td><span class="mono" style="color:#3F6B4F">+325</span> / <span class="mono" style="color:#8A3324">-1</span></td>
+      <td class="mono">2026-09-11</td>
+    </tr><tr>
+      <td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/24" target="_blank" rel="noopener">EPMCDMPTST-1965: Attendees Cannot Register for Individual Sessions</a></td>
+      <td><span class="tag merged">merged</span></td>
+      <td><span class="mono" style="color:#3F6B4F">+1,351</span> / <span class="mono" style="color:#8A3324">-56</span></td>
+      <td class="mono">2026-09-11</td>
+    </tr><tr>
+      <td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/26" target="_blank" rel="noopener">EPMCDMPTST-2326: Conference Search and Filtering</a></td>
+      <td><span class="tag open">opened</span></td>
+      <td><span class="mono" style="color:#3F6B4F">+2,205</span> / <span class="mono" style="color:#8A3324">-83</span></td>
+      <td class="mono">2026-09-14</td>
+    </tr></tbody></table></details><details><summary>Reviews (14)</summary>
+            <table class="item-table"><thead><tr><th>MR</th><th>Date</th></tr></thead>
+            <tbody><tr><td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/2" target="_blank" rel="noopener">feat(EPMCDMPTST-1945-BEVN-002): add Swagger/OpenAPI documentation for API endpoints</a></td><td class="mono">2026-09-08</td></tr><tr><td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/9" target="_blank" rel="noopener">EPMCDMPTST-1956 BEVN-110 Refactor Frontend: Component Structure</a></td><td class="mono">2026-09-09</td></tr><tr><td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/7" target="_blank" rel="noopener">EPMCDMPTST-1953 BEVN-107 Add Input Validation</a></td><td class="mono">2026-09-09</td></tr><tr><td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/5" target="_blank" rel="noopener">EPMCDMPTST-1949 Conference and Session Lists Don&#39;t Scale + linters</a></td><td class="mono">2026-09-09</td></tr><tr><td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/4" target="_blank" rel="noopener">EPMCDMPTST-1947 BEVN-101 Sessions Page Is Slow</a></td><td class="mono">2026-09-09</td></tr><tr><td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/13" target="_blank" rel="noopener">EPMCDMPTST-1950: Standardize API responses and error handling</a></td><td class="mono">2026-09-10</td></tr><tr><td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/11" target="_blank" rel="noopener">EPMCDMPTST-1962: Add speakers directory page</a></td><td class="mono">2026-09-10</td></tr><tr><td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/10" target="_blank" rel="noopener">EPMCDMPTST-1957: Frontend Cleanup After Code Review</a></td><td class="mono">2026-09-10</td></tr><tr><td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/23" target="_blank" rel="noopener">EPMCDMPTST-1964: Enforce frontend lint/format in CI and pre-commit</a></td><td class="mono">2026-09-11</td></tr><tr><td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/22" target="_blank" rel="noopener">EPMCDMPTST-1963: Add Create/Edit Conference forms</a></td><td class="mono">2026-09-11</td></tr><tr><td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/21" target="_blank" rel="noopener">Fix registration modal showing stale data after close (EPMCDMPTST-1961)</a></td><td class="mono">2026-09-11</td></tr><tr><td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/20" target="_blank" rel="noopener">Hide Register Now button for completed/cancelled conferences (EPMCDMPTST-1960)</a></td><td class="mono">2026-09-11</td></tr><tr><td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/19" target="_blank" rel="noopener">EPMCDMPTST-1959 Fix Security: Sensitive Data Logging and CORS</a></td><td class="mono">2026-09-11</td></tr><tr><td><a href="https://gitbud.epam.com/epm-cdmp/ai-runway/runs/September-2026/shazam/-/merge_requests/18" target="_blank" rel="noopener">EPMCDMPTST-1958 Fix Read Performance: Remove Unnecessary Change Tracking</a></td><td class="mono">2026-09-11</td></tr></tbody></table></details></div>
+<div class="section"><h2><span style="color:#C8C3B8;margin-right:.6rem">02</span>Code changes</h2><div class="stat-grid"><div class="stat"><div class="stat-value">71</div><div class="stat-label">Commits</div></div><div class="stat"><div class="stat-value positive">+5,454</div><div class="stat-label">Lines added</div></div><div class="stat"><div class="stat-value accent">-332</div><div class="stat-label">Lines removed</div></div><div class="stat"><div class="stat-value">121</div><div class="stat-label">Files touched</div></div><div class="stat"><div class="stat-value">0</div><div class="stat-label">Branches pushed</div></div></div></div>
+<div class="section"><h2><span style="color:#C8C3B8;margin-right:.6rem">03</span>AI usage</h2><div class="stat-grid"><div class="stat"><div class="stat-value">81</div><div class="stat-label">Sessions</div></div><div class="stat"><div class="stat-value">5 / 8</div><div class="stat-label">Active days</div></div><div class="stat"><div class="stat-value">15m</div><div class="stat-label">Avg session</div></div><div class="stat"><div class="stat-value">2</div><div class="stat-label">Projects</div></div><div class="stat"><div class="stat-value">3,019</div><div class="stat-label">Tool calls</div></div><div class="stat"><div class="stat-value">96%</div><div class="stat-label">Tool success rate</div></div><div class="stat"><div class="stat-value positive">+7,810</div><div class="stat-label">Net lines via AI</div></div><div class="stat"><div class="stat-value">180</div><div class="stat-label">Files modified</div></div></div></div>
+<div class="section"><h2><span style="color:#C8C3B8;margin-right:.6rem">04</span>Models used</h2><div class="bar-cols"><div><div class="bar-head">Model usage by cost</div><div class="bar-row"><span class="bar-name" title="claude-sonnet-5">claude-sonnet-5</span><span class="bar-track"><span class="bar-fill" style="width:100%;animation-delay:0.00s"></span></span><span class="bar-value">$123.06</span></div></div><div><div class="bar-head">Model usage by sessions</div><div class="bar-row"><span class="bar-name" title="claude-sonnet-5">claude-sonnet-5</span><span class="bar-track"><span class="bar-fill" style="width:100%;animation-delay:0.00s"></span></span><span class="bar-value">73<span class="bar-unit">sess</span></span></div></div></div></div>
+<div class="section"><h2><span style="color:#C8C3B8;margin-right:.6rem">05</span>Skills &amp; agents</h2><div class="bar-cols"><div><div class="bar-head">Skills invoked</div><div class="bar-row"><span class="bar-name" title="task-runner">task-runner</span><span class="bar-track"><span class="bar-fill" style="width:100%;animation-delay:0.00s"></span></span><span class="bar-value">20</span></div><div class="bar-row"><span class="bar-name" title="mr-review">mr-review</span><span class="bar-track"><span class="bar-fill" style="width:80%;animation-delay:0.04s"></span></span><span class="bar-value">16</span></div><div class="bar-row"><span class="bar-name" title="code-review">code-review</span><span class="bar-track"><span class="bar-fill" style="width:25%;animation-delay:0.08s"></span></span><span class="bar-value">5</span></div><div class="bar-row"><span class="bar-name" title="plan-creator">plan-creator</span><span class="bar-track"><span class="bar-fill" style="width:20%;animation-delay:0.12s"></span></span><span class="bar-value">4</span></div><div class="bar-row"><span class="bar-name" title="update-config">update-config</span><span class="bar-track"><span class="bar-fill" style="width:10%;animation-delay:0.16s"></span></span><span class="bar-value">2</span></div><div class="bar-row"><span class="bar-name" title="technical-debt-audit">technical-debt-audit</span><span class="bar-track"><span class="bar-fill" style="width:10%;animation-delay:0.20s"></span></span><span class="bar-value">2</span></div><div class="bar-row"><span class="bar-name" title="init">init</span><span class="bar-track"><span class="bar-fill" style="width:5%;animation-delay:0.24s"></span></span><span class="bar-value">1</span></div><div class="bar-row"><span class="bar-name" title="codemie:codemie-analytics">codemie:codemie-analytics</span><span class="bar-track"><span class="bar-fill" style="width:5%;animation-delay:0.28s"></span></span><span class="bar-value">1</span></div><div class="bar-row"><span class="bar-name" title="codemie:codemie-html-report">codemie:codemie-html-report</span><span class="bar-track"><span class="bar-fill" style="width:5%;animation-delay:0.32s"></span></span><span class="bar-value">1</span></div><div class="bar-row"><span class="bar-name" title="codemie:codemie-sdk">codemie:codemie-sdk</span><span class="bar-track"><span class="bar-fill" style="width:5%;animation-delay:0.36s"></span></span><span class="bar-value">1</span></div></div><div><div class="bar-head">Agents invoked</div><div class="bar-row"><span class="bar-name" title="Explore">Explore</span><span class="bar-track"><span class="bar-fill" style="width:100%;animation-delay:0.00s"></span></span><span class="bar-value">45</span></div><div class="bar-row"><span class="bar-name" title="general-purpose">general-purpose</span><span class="bar-track"><span class="bar-fill" style="width:29%;animation-delay:0.04s"></span></span><span class="bar-value">13</span></div><div class="bar-row"><span class="bar-name" title="Plan">Plan</span><span class="bar-track"><span class="bar-fill" style="width:13%;animation-delay:0.08s"></span></span><span class="bar-value">6</span></div><div class="bar-row"><span class="bar-name" title="statusline-setup">statusline-setup</span><span class="bar-track"><span class="bar-fill" style="width:9%;animation-delay:0.12s"></span></span><span class="bar-value">4</span></div></div></div><div class="bar-cols" style="margin-top:1.5rem"><div><div class="bar-head">Commands used</div><div class="bar-row"><span class="bar-name" title="clear">clear</span><span class="bar-track"><span class="bar-fill" style="width:100%;animation-delay:0.00s"></span></span><span class="bar-value">31</span></div><div class="bar-row"><span class="bar-name" title="statusline">statusline</span><span class="bar-track"><span class="bar-fill" style="width:6%;animation-delay:0.04s"></span></span><span class="bar-value">2</span></div><div class="bar-row"><span class="bar-name" title="task-runner">task-runner</span><span class="bar-track"><span class="bar-fill" style="width:3%;animation-delay:0.08s"></span></span><span class="bar-value">1</span></div></div><div><div class="bar-head">Languages edited</div><div class="meta-chips" style="margin-top:0"><span class="chip">javascript</span><span class="chip">json</span><span class="chip">markdown</span><span class="chip">yaml</span></div></div></div></div>
+<div class="section"><h2><span style="color:#C8C3B8;margin-right:.6rem">06</span>Tokens &amp; spend</h2><div class="stat-grid"><div class="stat"><div class="stat-value accent">$123.06</div><div class="stat-label">Total spend</div></div><div class="stat"><div class="stat-value">$51.07</div><div class="stat-label">Cache read spend</div></div><div class="stat"><div class="stat-value">920,631</div><div class="stat-label">Input tokens</div></div><div class="stat"><div class="stat-value">1,578,493</div><div class="stat-label">Output tokens</div></div><div class="stat"><div class="stat-value">170,234,853</div><div class="stat-label">Cache read tokens</div></div><div class="stat"><div class="stat-value">7,592,461</div><div class="stat-label">Cache write tokens</div></div><div class="stat"><div class="stat-value">180,326,438</div><div class="stat-label">Total tokens</div></div></div></div>
+<div class="section"><h2><span style="color:#C8C3B8;margin-right:.6rem">07</span>AI in delivered work</h2><table class="breakdown-table"><thead><tr><th></th><th>Factory</th><th>Skills</th><th>Agents</th><th>AI only</th><th>None</th></tr></thead><tbody><tr><th>Tickets</th><td class="c-dash">—</td><td class="c-skills">8</td><td class="c-dash">—</td><td class="c-aionly">1</td><td class="c-none">1</td></tr><tr><th>MRs</th><td class="c-dash">—</td><td class="c-skills">9</td><td class="c-dash">—</td><td class="c-aionly">1</td><td class="c-none">1</td></tr></tbody></table><p class="empty-state" style="margin-top:.5rem">Factory = sdlc-factory used &nbsp;·&nbsp; Skills = other skills used &nbsp;·&nbsp; Agents = subagents spawned &nbsp;·&nbsp; AI-only = sessions present, no skill/agent &nbsp;·&nbsp; None = no AI trace</p></div>
+<div class="section"><h2><span style="color:#C8C3B8;margin-right:.6rem">08</span>What went well</h2><ul class="flag-list good"><li>AI used on 5 of 6 working days — it is part of the daily routine.</li><li>17 of 21 delivered items were built with the factory or skills, not ad-hoc prompting.</li><li>Broad skill usage — 10 distinct skills with no single one dominating.</li><li>Strong cache reuse — sessions build on context instead of re-reading it.</li><li>Delivery is at or above the team median this period.</li><li>14 code reviews given — pulling weight on other people&#39;s work.</li><li>Every merged MR traces back to a ticket — clean, auditable history.</li><li>Working beyond chat — 10 skills and 4 agents in use.</li><li>10 of 11 MRs you opened were merged (91%) — what you start, you finish.</li><li>96% of 3019 tool calls succeeded — very little time lost to retries.</li></ul></div>
+<div class="section"><h2><span style="color:#C8C3B8;margin-right:.6rem">09</span>Needs attention</h2><ul class="flag-list"><li>Every session ran on claude-sonnet-5 — no routing between a cheaper model for routine work and a stronger one for hard problems.</li></ul></div></div>
+  <div id="coaching-section"><div class="section"><h2><span style="color:#C8C3B8;margin-right:.6rem">10</span>Coaching</h2><ol class="coaching-list"><li>All 81 sessions ran on claude-sonnet-5 only. Try routing at least a few sessions to a different model for tasks like large refactors or planning, then compare results, to see if a mix serves you better than one model for everything.</li><li>You were active 5 of 6 working days this period. Keep that near-daily cadence going rather than letting sessions cluster into a couple of long days.</li><li>Factory and skills already cover 17 of 21 delivered items. Keep routing new tickets and MRs through skills by default so that ratio holds or grows.</li><li>You used 10 distinct skills with none above 38% of calls, led by task-runner (20) and mr-review (16). Keep sampling across skills rather than settling into one or two favorites.</li><li>94% of your 180,326,438 tokens came from cache reads. Keep working in a way that reuses context across turns instead of restarting sessions from scratch, since that&#39;s what&#39;s keeping this ratio high.</li><li>Work moved steadily through to done this period. Keep that pace of pushing items to completion rather than letting them stall mid-flight.</li><li>You gave 14 reviews while authoring 11 MRs. Keep that split up, reviewing at least as much as you author, since it&#39;s currently working well.</li><li>All 10 of your merged MRs trace back to a ticket. Keep linking every MR to a ticket, including the 1 that&#39;s still open, so the full set stays traceable.</li><li>You used 10 skills and 4 agents (Explore 45 calls, general-purpose 13, Plan 6, statusline-setup 4). Keep leaning on agents like Explore and Plan for investigation and planning work, not just skills for execution.</li><li>10 of your 11 authored MRs merged, a 91% merge rate. Keep your MR quality bar where it is so that rate holds as volume grows.</li><li>96% of your 3,019 tool calls succeeded. Keep an eye on the remaining 4% of failures to spot any recurring pattern worth fixing at the source.</li></ol></div></div>
+</div>
+</body>
+</html>

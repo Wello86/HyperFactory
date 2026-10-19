@@ -1,0 +1,11 @@
+{
+  "name": "e2e",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@playwright/test": "1.47.2"
+  },
+  "scripts": {
+    "test:e2e": "docker-compose -f ../docker-compose.yml up -d && node wait-for-stack.mjs http://localhost:5173/ && playwright test"
+  }
+}

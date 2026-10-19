@@ -1,0 +1,140 @@
+stages:
+  - lint
+  - build
+  - test
+  - docker
+
+variables:
+  DOCKER_IMAGE: $CI_REGISTRY_IMAGE
+  DOCKER_HOST: tcp://localhost:2375
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_DRIVER: overlay2
+
+backend:lint:
+  stage: lint
+  image: mcr.microsoft.com/dotnet/sdk:10.0
+  script:
+    - dotnet restore backend/BrownEvents.sln
+    - dotnet format backend/BrownEvents.sln --verify-no-changes --no-restore
+  cache:
+    key: dotnet-packages
+    paths:
+      - ~/.nuget/packages
+
+frontend:lint:
+  stage: lint
+  image: node:18-alpine
+  script:
+    - cd frontend && npm ci && npm run lint && npm run format:check
+  cache:
+    key: npm-packages
+    paths:
+      - frontend/node_modules/
+
+backend:build:
+  stage: build
+  image: mcr.microsoft.com/dotnet/sdk:10.0
+  script:
+    - dotnet restore backend/BrownEvents.sln
+    - dotnet build backend/BrownEvents.sln --no-restore -c Release
+  artifacts:
+    paths:
+      - backend/BrownEvents.Api/bin/Release/net10.0/
+  cache:
+    key: dotnet-packages
+    paths:
+      - ~/.nuget/packages
+
+backend:test:
+  stage: test
+  image: mcr.microsoft.com/dotnet/sdk:10.0
+  script:
+    - dotnet test backend/BrownEvents.Tests/BrownEvents.Tests.csproj -c Release --logger "console;verbosity=normal"
+  cache:
+    key: dotnet-packages
+    paths:
+      - ~/.nuget/packages
+
+frontend:test:
+  stage: test
+  image: node:18-alpine
+  rules:
+    - changes:
+        - frontend/**/*
+  before_script:
+    - apk add --no-cache python3 py3-pip git
+    - pip install --break-system-packages diff-cover
+  script:
+    - cd frontend && npm ci && npm run test:coverage
+    - ./scripts/check-diff-coverage.sh
+  coverage: '/All files[^|]*\|[^|]*\s+([\d.]+)/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: frontend/coverage/cobertura-coverage.xml
+    paths:
+      - frontend/coverage/
+  cache:
+    key: npm-packages
+    paths:
+      - frontend/node_modules/
+
+e2e:test:
+  stage: test
+  image: docker:28.5.2
+  services:
+    - name: docker:28.5.2-dind
+      command: ["--tls=false"]
+  script:
+    - apk add --no-cache nodejs npm
+    - docker compose -f docker-compose.yml up -d --build
+    - cd e2e && npm ci
+    - node wait-for-stack.mjs http://localhost:5000/api/conferences 120000
+    - node wait-for-stack.mjs http://localhost:5173/ 120000
+    - docker run --rm --network host -v "$CI_PROJECT_DIR/e2e:/work" -w /work mcr.microsoft.com/playwright:v1.47.2-noble sh -c "npm ci && npx playwright test"
+  after_script:
+    - docker compose -f docker-compose.yml down -v
+  artifacts:
+    when: on_failure
+    paths:
+      - e2e/test-results/
+
+frontend:build:
+  stage: build
+  image: node:18-alpine
+  script:
+    - cd frontend && npm ci && npm run build
+  artifacts:
+    paths:
+      - frontend/dist/
+  cache:
+    key: npm-packages
+    paths:
+      - frontend/node_modules/
+
+docker:backend:
+  stage: docker
+  image: docker:28.5.2
+  services:
+    - name: docker:28.5.2-dind
+      command: ["--tls=false"]
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $DOCKER_IMAGE/backend:$CI_COMMIT_SHORT_SHA ./backend -f ./backend/BrownEvents.Api/Dockerfile
+    - docker push $DOCKER_IMAGE/backend:$CI_COMMIT_SHORT_SHA
+  only:
+    - main
+
+docker:frontend:
+  stage: docker
+  image: docker:28.5.2
+  services:
+    - name: docker:28.5.2-dind
+      command: ["--tls=false"]
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $DOCKER_IMAGE/frontend:$CI_COMMIT_SHORT_SHA ./frontend
+    - docker push $DOCKER_IMAGE/frontend:$CI_COMMIT_SHORT_SHA
+  only:
+    - main

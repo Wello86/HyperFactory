@@ -1,0 +1,8 @@
+pre-commit:
+  commands:
+    dotnet-format:
+      glob: "backend/**/*.cs"
+      run: dotnet format backend/BrownEvents.sln --verify-no-changes
+    frontend-lint:
+      glob: "frontend/**/*.{js,jsx}"
+      run: npm --prefix frontend run lint && npm --prefix frontend run format:check

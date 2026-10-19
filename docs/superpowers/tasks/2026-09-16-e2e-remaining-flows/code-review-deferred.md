@@ -1,0 +1,5 @@
+# Deferred from code review — 2026-09-16-e2e-remaining-flows (2026-09-16)
+
+- **`waitForStack` treats any 2xx-399 as ready without distinguishing app-level errors** — `e2e/wait-for-stack.mjs`. A misconfigured app returning 4xx/5xx on every request is retried silently until timeout with no diagnostic of the real cause. Pre-existing: shipped as part of the e2e-foundation slice (already reviewed/merged to branch); this slice reuses the helper unmodified and does not touch its status-check logic.
+- **`wait-for-stack.unit.spec.ts` assumes `server.address()` always returns an `AddressInfo` object** — `e2e/tests/wait-for-stack.unit.spec.ts`. A string (unix socket) or `null` address would throw a raw `TypeError` instead of a clear test-setup failure. Pre-existing: part of the e2e-foundation slice's already-reviewed test helper, unmodified here.
+- **CLI arg parsing in `wait-for-stack.mjs` does not validate `timeoutMs`/`intervalMs` are numeric** — `e2e/wait-for-stack.mjs`. A non-numeric CLI arg produces `NaN`, making the poll loop exit immediately as a silent, unhelpful "timeout". Pre-existing: part of the e2e-foundation slice's already-reviewed helper, unmodified here.

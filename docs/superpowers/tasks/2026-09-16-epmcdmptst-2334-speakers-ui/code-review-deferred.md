@@ -1,0 +1,4 @@
+# Deferred from code review — 2026-09-16-epmcdmptst-2334-speakers-ui (2026-09-16)
+
+- **No concurrency/row-version check on speaker update** — `backend/BrownEvents.Api/Services/SpeakerService.cs:37-49` — `UpdateAsync` reads-then-writes with no concurrency token, so two concurrent edits silently last-write-wins. Pre-existing: `ConferenceService.UpdateAsync` (backend/BrownEvents.Api/Services/ConferenceService.cs:86-100) uses the identical read-modify-write pattern with no concurrency check; this change explicitly mirrors that existing service, it does not introduce the gap.
+- **No unmount/stale-response guard in edit-page load effect** — `frontend/src/pages/SpeakerEditPage.jsx:17-35` — the `getSpeaker(id)` effect has no `active`/cleanup flag, so a stale response could call `setState` after unmount or for a changed `id`. Pre-existing: `ConferenceEditPage.jsx:22-35` uses the identical unguarded effect; this page mirrors that established pattern exactly.

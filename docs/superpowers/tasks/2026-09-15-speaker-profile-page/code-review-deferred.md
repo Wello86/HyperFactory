@@ -1,0 +1,4 @@
+# Deferred from code review — 2026-09-15-speaker-profile-page (2026-09-15)
+
+- **Speaker email rendered on public unauthenticated profile** — `backend/BrownEvents.Api/Dtos/SpeakerProfileDto.cs`, `frontend/src/pages/SpeakerProfilePage.jsx` — a per-speaker page makes email harvesting easier via a predictable per-id URL. Pre-existing: `ToDto(this Speaker)` already returns `Email` on the existing unauthenticated `GET /api/speakers` list endpoint, so this diff does not introduce the exposure, only a more targeted access pattern to already-public data.
+- **Session times shown with no timezone handling or indicator** — `frontend/src/pages/SpeakerProfilePage.jsx:95` (`formatTime` usage) — an unspecified/local-time `DateTime` renders shifted or unlabeled. Pre-existing: `frontend/src/pages/SessionDetailPage.jsx` uses the identical `formatTime`/`formatDate` pattern with the same gap, so this change follows an existing convention rather than introducing a new one.

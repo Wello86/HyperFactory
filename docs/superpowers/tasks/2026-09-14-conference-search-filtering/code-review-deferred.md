@@ -1,0 +1,3 @@
+# Deferred from code review — 2026-09-14-conference-search-filtering (2026-09-14)
+
+- **DateTimeKind/timezone not normalized for date-range filters** — `backend/BrownEvents.Api/Services/ConferenceService.cs:35-43` — `from`/`to` are compared directly against `StartDate`/`EndDate` with no `DateTimeKind`/timezone normalization; behavior depends on how those columns' `Kind` was set at creation time. Pre-existing: this change only adds new `Where` comparisons against the already-existing `StartDate`/`EndDate` columns — it does not touch how those columns are populated or which `DateTimeKind` they carry, so any inconsistency predates this diff.
